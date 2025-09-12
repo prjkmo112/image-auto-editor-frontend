@@ -1,0 +1,3 @@
+window.APP_CONFIG = {
+  "REST_API_URL": "$REST_API_URL"
+}

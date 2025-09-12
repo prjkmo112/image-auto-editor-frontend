@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Image Auto Editor icon">
+  <defs>
+    <!-- 블루 → 퍼플 그라데이션 -->
+    <linearGradient id="iaa-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1FA2FF"/>
+      <stop offset="50%" stop-color="#5B7CFF"/>
+      <stop offset="100%" stop-color="#7A5CFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 라운드 사각 프레임 -->
+  <rect x="24" y="24" width="208" height="208" rx="40"
+        fill="none" stroke="url(#iaa-grad)" stroke-width="18" />
+
+  <!-- 미니멀 풍경: 산 -->
+  <path d="M72 168 L116 112 L144 148 L176 108 L216 176 L72 176 Z"
+        fill="url(#iaa-grad)"/>
+
+  <!-- 태양/달 -->
+  <circle cx="170" cy="86" r="12" fill="url(#iaa-grad)"/>
+
+  <!-- 자동 편집 느낌의 우향 화살표 (부드러운 곡선) -->
+  <path d="M84 176
+           C 120 176, 140 176, 168 176"
+        fill="none" stroke="url(#iaa-grad)" stroke-width="18"
+        stroke-linecap="round" stroke-linejoin="round" />
+  <polygon points="176,152 216,176 176,200"
+           fill="url(#iaa-grad)"/>
+</svg>
