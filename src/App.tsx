@@ -1,12 +1,14 @@
 import React, { useState } from "react"
 import { ConfigProvider, Layout, Menu, Spin, theme } from "antd"
 import type { ItemType, MenuItemType } from "antd/es/menu/interface"
-import { FileAddOutlined, FileExclamationFilled } from "@ant-design/icons"
+import { FileAddOutlined, FileExclamationFilled, FileImageOutlined, PlayCircleOutlined } from "@ant-design/icons"
 import { useUIStore } from "./stores/uiStore"
 import { Route, Routes, useNavigate } from "react-router-dom"
 import { PageRoutes } from "./routes"
 import TargetImagePage from "./pages/TargetImagePage"
 import SourceImagePage from "./pages/SourceImagePage"
+import ProcessedImagePage from "./pages/ProcessedImagePage"
+import MainLayout from "./layouts/MainLayout"
 
 const { Sider, Content } = Layout
 
@@ -25,8 +27,18 @@ const items: ItemType<MenuItemType>[] = [
         label: 'Source Image',
         icon: <FileExclamationFilled />,
       },
+      {
+        key: 'processed-image',
+        label: 'Processed Image',
+        icon: <FileImageOutlined />,
+      }
     ]
   },
+  {
+    key: "playground",
+    label: "Playground",
+    icon: <PlayCircleOutlined />,
+  }
 ]
 
 const App: React.FC = () => {
@@ -36,7 +48,7 @@ const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
 
   const {
-    token: { colorBgContainer, borderRadiusLG }
+    token: { colorBgContainer, borderRadiusLG, colorBgMask }
   } = theme.useToken()
 
   return (
@@ -47,6 +59,7 @@ const App: React.FC = () => {
             headerBg: colorBgContainer,
             colorBgContainer: colorBgContainer,
             borderRadiusLG: borderRadiusLG,
+            colorBgMask: colorBgMask,
           }
         }
       }}
@@ -68,8 +81,11 @@ const App: React.FC = () => {
               }}
             >
               <Routes>
-                <Route path={PageRoutes.TARGET_IMAGE} element={<TargetImagePage />} />
-                <Route path={PageRoutes.SOURCE_IMAGE} element={<SourceImagePage />} />
+                <Route element={<MainLayout />}>
+                  <Route path={PageRoutes.TARGET_IMAGE} element={<TargetImagePage />} />
+                  <Route path={PageRoutes.SOURCE_IMAGE} element={<SourceImagePage />} />
+                  <Route path={PageRoutes.PROCESSED_IMAGE} element={<ProcessedImagePage />} />
+                </Route>
               </Routes>
             </div>
           </Content>

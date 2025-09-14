@@ -3,6 +3,7 @@ export {}
 
 interface APP_CONFIG_TYPE {
   REST_API_URL: string
+  IMG_SERVER_URL: string
 }
 
 declare global {

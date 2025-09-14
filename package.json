@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:openapi-generate": "openapi-generator-cli generate -i http://127.0.0.1:8000/openapi.json -g typescript-axios -o src/api --additional-properties=ngVersion=6.1.7,npmName=restClient,supportsES6=true,npmVersion=6.9.0,withInterfaces=true"
   },
   "dependencies": {
     "@ant-design/icons": "^5.6.1",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@openapitools/openapi-generator-cli": "^2.23.1",
     "antd": "^5.27.3",
     "axios": "^1.11.0",
     "lru-cache": "^11.2.1",
