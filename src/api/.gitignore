@@ -3,11 +3,7 @@ node_modules
 typings
 dist
 
-package.json
-package-lock.json
 *.md
-tsconfig*.json
-
 *.sh
-
-docs/
+package.json
+tsconfig*.json
