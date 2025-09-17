@@ -1,4 +1,4 @@
-import { TargetImageResponse } from "@/api";
+import { TargetImageResponse } from "@/api"
 import { Drawer } from "antd"
 
 interface ImageDetailDrawerCompProps {

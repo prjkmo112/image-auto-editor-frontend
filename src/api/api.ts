@@ -366,10 +366,108 @@ export const ImageApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getImageApiImageImageIdGet: async (imageId: string, blur?: number, width?: number, height?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getImageApiImageTargetImageIdGet: async (imageId: string, blur?: number, width?: number, height?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'imageId' is not null or undefined
-            assertParamExists('getImageApiImageImageIdGet', 'imageId', imageId)
-            const localVarPath = `/api/image/{image_id}`
+            assertParamExists('getImageApiImageTargetImageIdGet', 'imageId', imageId)
+            const localVarPath = `/api/image/target/{image_id}`
+                .replace(`{${"image_id"}}`, encodeURIComponent(String(imageId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (blur !== undefined) {
+                localVarQueryParameter['blur'] = blur;
+            }
+
+            if (width !== undefined) {
+                localVarQueryParameter['width'] = width;
+            }
+
+            if (height !== undefined) {
+                localVarQueryParameter['height'] = height;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get Marked Image
+         * @param {string} imageId 
+         * @param {number} [blur] 
+         * @param {number} [width] 
+         * @param {number} [height] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMarkedImageApiImageMarkedImageIdGet: async (imageId: string, blur?: number, width?: number, height?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'imageId' is not null or undefined
+            assertParamExists('getMarkedImageApiImageMarkedImageIdGet', 'imageId', imageId)
+            const localVarPath = `/api/image/marked/{image_id}`
+                .replace(`{${"image_id"}}`, encodeURIComponent(String(imageId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (blur !== undefined) {
+                localVarQueryParameter['blur'] = blur;
+            }
+
+            if (width !== undefined) {
+                localVarQueryParameter['width'] = width;
+            }
+
+            if (height !== undefined) {
+                localVarQueryParameter['height'] = height;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get Sliced Image
+         * @param {string} imageId 
+         * @param {number} [blur] 
+         * @param {number} [width] 
+         * @param {number} [height] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSlicedImageApiImageSlicedImageIdGet: async (imageId: string, blur?: number, width?: number, height?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'imageId' is not null or undefined
+            assertParamExists('getSlicedImageApiImageSlicedImageIdGet', 'imageId', imageId)
+            const localVarPath = `/api/image/sliced/{image_id}`
                 .replace(`{${"image_id"}}`, encodeURIComponent(String(imageId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -425,10 +523,42 @@ export const ImageApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getImageApiImageImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getImageApiImageImageIdGet(imageId, blur, width, height, options);
+        async getImageApiImageTargetImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getImageApiImageTargetImageIdGet(imageId, blur, width, height, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ImageApi.getImageApiImageImageIdGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.getImageApiImageTargetImageIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get Marked Image
+         * @param {string} imageId 
+         * @param {number} [blur] 
+         * @param {number} [width] 
+         * @param {number} [height] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMarkedImageApiImageMarkedImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMarkedImageApiImageMarkedImageIdGet(imageId, blur, width, height, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.getMarkedImageApiImageMarkedImageIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get Sliced Image
+         * @param {string} imageId 
+         * @param {number} [blur] 
+         * @param {number} [width] 
+         * @param {number} [height] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSlicedImageApiImageSlicedImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSlicedImageApiImageSlicedImageIdGet(imageId, blur, width, height, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.getSlicedImageApiImageSlicedImageIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -451,8 +581,34 @@ export const ImageApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getImageApiImageImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): AxiosPromise<any> {
-            return localVarFp.getImageApiImageImageIdGet(imageId, blur, width, height, options).then((request) => request(axios, basePath));
+        getImageApiImageTargetImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): AxiosPromise<any> {
+            return localVarFp.getImageApiImageTargetImageIdGet(imageId, blur, width, height, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get Marked Image
+         * @param {string} imageId 
+         * @param {number} [blur] 
+         * @param {number} [width] 
+         * @param {number} [height] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMarkedImageApiImageMarkedImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): AxiosPromise<any> {
+            return localVarFp.getMarkedImageApiImageMarkedImageIdGet(imageId, blur, width, height, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get Sliced Image
+         * @param {string} imageId 
+         * @param {number} [blur] 
+         * @param {number} [width] 
+         * @param {number} [height] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSlicedImageApiImageSlicedImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): AxiosPromise<any> {
+            return localVarFp.getSlicedImageApiImageSlicedImageIdGet(imageId, blur, width, height, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -474,7 +630,33 @@ export interface ImageApiInterface {
      * @throws {RequiredError}
      * @memberof ImageApiInterface
      */
-    getImageApiImageImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    getImageApiImageTargetImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+
+    /**
+     * 
+     * @summary Get Marked Image
+     * @param {string} imageId 
+     * @param {number} [blur] 
+     * @param {number} [width] 
+     * @param {number} [height] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImageApiInterface
+     */
+    getMarkedImageApiImageMarkedImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+
+    /**
+     * 
+     * @summary Get Sliced Image
+     * @param {string} imageId 
+     * @param {number} [blur] 
+     * @param {number} [width] 
+     * @param {number} [height] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImageApiInterface
+     */
+    getSlicedImageApiImageSlicedImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig): AxiosPromise<any>;
 
 }
 
@@ -496,8 +678,38 @@ export class ImageApi extends BaseAPI implements ImageApiInterface {
      * @throws {RequiredError}
      * @memberof ImageApi
      */
-    public getImageApiImageImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig) {
-        return ImageApiFp(this.configuration).getImageApiImageImageIdGet(imageId, blur, width, height, options).then((request) => request(this.axios, this.basePath));
+    public getImageApiImageTargetImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).getImageApiImageTargetImageIdGet(imageId, blur, width, height, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get Marked Image
+     * @param {string} imageId 
+     * @param {number} [blur] 
+     * @param {number} [width] 
+     * @param {number} [height] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImageApi
+     */
+    public getMarkedImageApiImageMarkedImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).getMarkedImageApiImageMarkedImageIdGet(imageId, blur, width, height, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get Sliced Image
+     * @param {string} imageId 
+     * @param {number} [blur] 
+     * @param {number} [width] 
+     * @param {number} [height] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImageApi
+     */
+    public getSlicedImageApiImageSlicedImageIdGet(imageId: string, blur?: number, width?: number, height?: number, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).getSlicedImageApiImageSlicedImageIdGet(imageId, blur, width, height, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -512,20 +724,14 @@ export const ProcImageApiAxiosParamCreator = function (configuration?: Configura
         /**
          * image proc
          * @summary Proc Image
-         * @param {Array<string>} tags 
-         * @param {Array<string>} targetFilterTags 
-         * @param {Array<string>} targetFilterNames 
+         * @param {string} tags 
          * @param {File} file 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        procImageApiProcImagesRemovePost: async (tags: Array<string>, targetFilterTags: Array<string>, targetFilterNames: Array<string>, file: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        procImageApiProcImagesRemovePost: async (tags: string, file: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tags' is not null or undefined
             assertParamExists('procImageApiProcImagesRemovePost', 'tags', tags)
-            // verify required parameter 'targetFilterTags' is not null or undefined
-            assertParamExists('procImageApiProcImagesRemovePost', 'targetFilterTags', targetFilterTags)
-            // verify required parameter 'targetFilterNames' is not null or undefined
-            assertParamExists('procImageApiProcImagesRemovePost', 'targetFilterNames', targetFilterNames)
             // verify required parameter 'file' is not null or undefined
             assertParamExists('procImageApiProcImagesRemovePost', 'file', file)
             const localVarPath = `/api/proc-images/remove`;
@@ -541,19 +747,11 @@ export const ProcImageApiAxiosParamCreator = function (configuration?: Configura
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
-            if (tags) {
-                localVarFormParams.append('tags', tags.join(COLLECTION_FORMATS.csv));
+            if (tags !== undefined) {
+                localVarQueryParameter['tags'] = tags;
             }
 
-                if (targetFilterTags) {
-                localVarFormParams.append('target_filter_tags', targetFilterTags.join(COLLECTION_FORMATS.csv));
-            }
 
-                if (targetFilterNames) {
-                localVarFormParams.append('target_filter_names', targetFilterNames.join(COLLECTION_FORMATS.csv));
-            }
-
-    
             if (file !== undefined) { 
                 localVarFormParams.append('file', file as any);
             }
@@ -584,15 +782,13 @@ export const ProcImageApiFp = function(configuration?: Configuration) {
         /**
          * image proc
          * @summary Proc Image
-         * @param {Array<string>} tags 
-         * @param {Array<string>} targetFilterTags 
-         * @param {Array<string>} targetFilterNames 
+         * @param {string} tags 
          * @param {File} file 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async procImageApiProcImagesRemovePost(tags: Array<string>, targetFilterTags: Array<string>, targetFilterNames: Array<string>, file: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.procImageApiProcImagesRemovePost(tags, targetFilterTags, targetFilterNames, file, options);
+        async procImageApiProcImagesRemovePost(tags: string, file: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.procImageApiProcImagesRemovePost(tags, file, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProcImageApi.procImageApiProcImagesRemovePost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -610,15 +806,13 @@ export const ProcImageApiFactory = function (configuration?: Configuration, base
         /**
          * image proc
          * @summary Proc Image
-         * @param {Array<string>} tags 
-         * @param {Array<string>} targetFilterTags 
-         * @param {Array<string>} targetFilterNames 
+         * @param {string} tags 
          * @param {File} file 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        procImageApiProcImagesRemovePost(tags: Array<string>, targetFilterTags: Array<string>, targetFilterNames: Array<string>, file: File, options?: RawAxiosRequestConfig): AxiosPromise<any> {
-            return localVarFp.procImageApiProcImagesRemovePost(tags, targetFilterTags, targetFilterNames, file, options).then((request) => request(axios, basePath));
+        procImageApiProcImagesRemovePost(tags: string, file: File, options?: RawAxiosRequestConfig): AxiosPromise<any> {
+            return localVarFp.procImageApiProcImagesRemovePost(tags, file, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -632,15 +826,13 @@ export interface ProcImageApiInterface {
     /**
      * image proc
      * @summary Proc Image
-     * @param {Array<string>} tags 
-     * @param {Array<string>} targetFilterTags 
-     * @param {Array<string>} targetFilterNames 
+     * @param {string} tags 
      * @param {File} file 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProcImageApiInterface
      */
-    procImageApiProcImagesRemovePost(tags: Array<string>, targetFilterTags: Array<string>, targetFilterNames: Array<string>, file: File, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    procImageApiProcImagesRemovePost(tags: string, file: File, options?: RawAxiosRequestConfig): AxiosPromise<any>;
 
 }
 
@@ -654,16 +846,14 @@ export class ProcImageApi extends BaseAPI implements ProcImageApiInterface {
     /**
      * image proc
      * @summary Proc Image
-     * @param {Array<string>} tags 
-     * @param {Array<string>} targetFilterTags 
-     * @param {Array<string>} targetFilterNames 
+     * @param {string} tags 
      * @param {File} file 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProcImageApi
      */
-    public procImageApiProcImagesRemovePost(tags: Array<string>, targetFilterTags: Array<string>, targetFilterNames: Array<string>, file: File, options?: RawAxiosRequestConfig) {
-        return ProcImageApiFp(this.configuration).procImageApiProcImagesRemovePost(tags, targetFilterTags, targetFilterNames, file, options).then((request) => request(this.axios, this.basePath));
+    public procImageApiProcImagesRemovePost(tags: string, file: File, options?: RawAxiosRequestConfig) {
+        return ProcImageApiFp(this.configuration).procImageApiProcImagesRemovePost(tags, file, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -679,13 +869,13 @@ export const TargetImagesApiAxiosParamCreator = function (configuration?: Config
          * 제거 대상 이미지 등록
          * @summary Create Target Image
          * @param {string} name 
-         * @param {Array<string>} tags 
+         * @param {string} tags 
          * @param {File} file 
          * @param {boolean} [isActive] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createTargetImageApiTargetImagesRegisterPost: async (name: string, tags: Array<string>, file: File, isActive?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createTargetImageApiTargetImagesRegisterPost: async (name: string, tags: string, file: File, isActive?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'name' is not null or undefined
             assertParamExists('createTargetImageApiTargetImagesRegisterPost', 'name', name)
             // verify required parameter 'tags' is not null or undefined
@@ -713,11 +903,11 @@ export const TargetImagesApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['is_active'] = isActive;
             }
 
-            if (tags) {
-                localVarFormParams.append('tags', tags.join(COLLECTION_FORMATS.csv));
+            if (tags !== undefined) {
+                localVarQueryParameter['tags'] = tags;
             }
 
-    
+
             if (file !== undefined) { 
                 localVarFormParams.append('file', file as any);
             }
@@ -794,13 +984,13 @@ export const TargetImagesApiFp = function(configuration?: Configuration) {
          * 제거 대상 이미지 등록
          * @summary Create Target Image
          * @param {string} name 
-         * @param {Array<string>} tags 
+         * @param {string} tags 
          * @param {File} file 
          * @param {boolean} [isActive] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createTargetImageApiTargetImagesRegisterPost(name: string, tags: Array<string>, file: File, isActive?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async createTargetImageApiTargetImagesRegisterPost(name: string, tags: string, file: File, isActive?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createTargetImageApiTargetImagesRegisterPost(name, tags, file, isActive, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TargetImagesApi.createTargetImageApiTargetImagesRegisterPost']?.[localVarOperationServerIndex]?.url;
@@ -835,13 +1025,13 @@ export const TargetImagesApiFactory = function (configuration?: Configuration, b
          * 제거 대상 이미지 등록
          * @summary Create Target Image
          * @param {string} name 
-         * @param {Array<string>} tags 
+         * @param {string} tags 
          * @param {File} file 
          * @param {boolean} [isActive] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createTargetImageApiTargetImagesRegisterPost(name: string, tags: Array<string>, file: File, isActive?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<any> {
+        createTargetImageApiTargetImagesRegisterPost(name: string, tags: string, file: File, isActive?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<any> {
             return localVarFp.createTargetImageApiTargetImagesRegisterPost(name, tags, file, isActive, options).then((request) => request(axios, basePath));
         },
         /**
@@ -869,14 +1059,14 @@ export interface TargetImagesApiInterface {
      * 제거 대상 이미지 등록
      * @summary Create Target Image
      * @param {string} name 
-     * @param {Array<string>} tags 
+     * @param {string} tags 
      * @param {File} file 
      * @param {boolean} [isActive] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TargetImagesApiInterface
      */
-    createTargetImageApiTargetImagesRegisterPost(name: string, tags: Array<string>, file: File, isActive?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<any>;
+    createTargetImageApiTargetImagesRegisterPost(name: string, tags: string, file: File, isActive?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<any>;
 
     /**
      * 목록 조회
@@ -903,14 +1093,14 @@ export class TargetImagesApi extends BaseAPI implements TargetImagesApiInterface
      * 제거 대상 이미지 등록
      * @summary Create Target Image
      * @param {string} name 
-     * @param {Array<string>} tags 
+     * @param {string} tags 
      * @param {File} file 
      * @param {boolean} [isActive] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TargetImagesApi
      */
-    public createTargetImageApiTargetImagesRegisterPost(name: string, tags: Array<string>, file: File, isActive?: boolean, options?: RawAxiosRequestConfig) {
+    public createTargetImageApiTargetImagesRegisterPost(name: string, tags: string, file: File, isActive?: boolean, options?: RawAxiosRequestConfig) {
         return TargetImagesApiFp(this.configuration).createTargetImageApiTargetImagesRegisterPost(name, tags, file, isActive, options).then((request) => request(this.axios, this.basePath));
     }
 
