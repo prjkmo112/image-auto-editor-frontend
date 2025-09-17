@@ -24,7 +24,7 @@ const UploadModalComp: React.FC<UploadModalCompProps> = (props) => {
       console.log('Form Values:', formValues)
       await targetImagesApi.createTargetImageApiTargetImagesRegisterPost(
         formValues.name,
-        formValues.tags.join(',') || "",
+        (formValues.tags || []).join(','),
         formValues.file?.file,
         formValues.is_active
       )
