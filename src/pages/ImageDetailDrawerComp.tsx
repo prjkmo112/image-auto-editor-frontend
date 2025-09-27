@@ -34,16 +34,16 @@ const SingleImageView: React.FC<{ url: string }> = ({ url }) => {
 const SplitImageView: React.FC<{ viewInfo: SplitImageViewInfo }> = (props) => {
   return (
     <Row gutter={16}>
-      <Col span={11}>
+      <Col span={11} style={{ margin: "0 auto", textAlign: "center" }}>
         <Typography.Title level={3}>{props.viewInfo.leftTitle}</Typography.Title>
-        <img src={props.viewInfo.leftUrl} />
+        <img src={props.viewInfo.leftUrl} style={{ width: "80%" }} />
       </Col>
       <Col span={2} style={{ textAlign: "center" }}>
         <Divider type="vertical" style={{ height: "100%" }} />
       </Col>
-      <Col span={11}>
+      <Col span={11} style={{ margin: "0 auto", textAlign: "center" }}>
         <Typography.Title level={3}>{props.viewInfo.rightTitle}</Typography.Title>
-        <img src={props.viewInfo.rightUrl} />
+        <img src={props.viewInfo.rightUrl} style={{ width: "80%" }} />
       </Col>
     </Row>
   )
