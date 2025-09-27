@@ -39,6 +39,92 @@ export interface HTTPValidationError {
 /**
  * 
  * @export
+ * @interface ProcessedImageListResponse
+ */
+export interface ProcessedImageListResponse {
+    /**
+     * 
+     * @type {Array<ProcessedImageResponse>}
+     * @memberof ProcessedImageListResponse
+     */
+    'items': Array<ProcessedImageResponse>;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProcessedImageListResponse
+     */
+    'page': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProcessedImageListResponse
+     */
+    'cnt': number;
+}
+/**
+ * 
+ * @export
+ * @interface ProcessedImageResponse
+ */
+export interface ProcessedImageResponse {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProcessedImageResponse
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProcessedImageResponse
+     */
+    'url_id'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProcessedImageResponse
+     */
+    'marked_file_size': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProcessedImageResponse
+     */
+    'marked_file_mime_type': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProcessedImageResponse
+     */
+    'marked_file_type'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProcessedImageResponse
+     */
+    'sliced_file_size': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProcessedImageResponse
+     */
+    'sliced_file_mime_type': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProcessedImageResponse
+     */
+    'sliced_file_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProcessedImageResponse
+     */
+    'created_at': string;
+}
+/**
+ * 
+ * @export
  * @interface TargetImageListResponse
  */
 export interface TargetImageListResponse {
@@ -722,6 +808,46 @@ export class ImageApi extends BaseAPI implements ImageApiInterface {
 export const ProcImageApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * 
+         * @summary Get Proc Image List
+         * @param {number} [page] 
+         * @param {number} [size] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProcImageListApiProcImagesListGet: async (page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/proc-images/list`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * image proc
          * @summary Proc Image
          * @param {string} tags 
@@ -780,6 +906,20 @@ export const ProcImageApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ProcImageApiAxiosParamCreator(configuration)
     return {
         /**
+         * 
+         * @summary Get Proc Image List
+         * @param {number} [page] 
+         * @param {number} [size] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getProcImageListApiProcImagesListGet(page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProcessedImageListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProcImageListApiProcImagesListGet(page, size, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProcImageApi.getProcImageListApiProcImagesListGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * image proc
          * @summary Proc Image
          * @param {string} tags 
@@ -804,6 +944,17 @@ export const ProcImageApiFactory = function (configuration?: Configuration, base
     const localVarFp = ProcImageApiFp(configuration)
     return {
         /**
+         * 
+         * @summary Get Proc Image List
+         * @param {number} [page] 
+         * @param {number} [size] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProcImageListApiProcImagesListGet(page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProcessedImageListResponse> {
+            return localVarFp.getProcImageListApiProcImagesListGet(page, size, options).then((request) => request(axios, basePath));
+        },
+        /**
          * image proc
          * @summary Proc Image
          * @param {string} tags 
@@ -824,6 +975,17 @@ export const ProcImageApiFactory = function (configuration?: Configuration, base
  */
 export interface ProcImageApiInterface {
     /**
+     * 
+     * @summary Get Proc Image List
+     * @param {number} [page] 
+     * @param {number} [size] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProcImageApiInterface
+     */
+    getProcImageListApiProcImagesListGet(page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProcessedImageListResponse>;
+
+    /**
      * image proc
      * @summary Proc Image
      * @param {string} tags 
@@ -843,6 +1005,19 @@ export interface ProcImageApiInterface {
  * @extends {BaseAPI}
  */
 export class ProcImageApi extends BaseAPI implements ProcImageApiInterface {
+    /**
+     * 
+     * @summary Get Proc Image List
+     * @param {number} [page] 
+     * @param {number} [size] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProcImageApi
+     */
+    public getProcImageListApiProcImagesListGet(page?: number, size?: number, options?: RawAxiosRequestConfig) {
+        return ProcImageApiFp(this.configuration).getProcImageListApiProcImagesListGet(page, size, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * image proc
      * @summary Proc Image
