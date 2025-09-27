@@ -27,7 +27,7 @@ interface ImageDetailDrawerCompProps {
 
 const SingleImageView: React.FC<{ url: string }> = ({ url }) => {
   return (
-    <img src={url} style={{ width: '100%' }} />
+    <img src={url} style={{ width: '60%' }} />
   )
 }
 
