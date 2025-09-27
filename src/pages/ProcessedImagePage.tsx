@@ -64,6 +64,8 @@ const ProcessedImagePage = () => {
           type: "split",
           leftUrl: `${window.APP_CONFIG.IMG_SERVER_URL}/marked/${drawerOpenedImage?.url_id}`,
           rightUrl: `${window.APP_CONFIG.IMG_SERVER_URL}/sliced/${drawerOpenedImage?.url_id}`,
+          leftTitle: "Marked Image",
+          rightTitle: "Sliced Image",
         }}
       />
     </>
