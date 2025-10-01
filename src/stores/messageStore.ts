@@ -11,37 +11,22 @@ interface MessageState {
   loadingMsg: (message: string) => void;
 }
 
-export const useMessageStore = create<MessageState>((set) => ({
+export const useMessageStore = create<MessageState>((set, get) => ({
   messageApi: null,
   setMessageApi: (api: MessageInstance) => set({ messageApi: api }),
   successMsg: (message: string) => {
-    set((state) => {
-      state.messageApi?.success(message)
-      return state
-    })
+    get().messageApi?.success(message)
   },
   errorMsg: (message: string) => {
-    set((state) => {
-      state.messageApi?.error(message)
-      return state
-    })
+    get().messageApi?.error(message)
   },
   warningMsg: (message: string) => {
-    set((state) => {
-      state.messageApi?.warning(message)
-      return state
-    })
+    get().messageApi?.warning(message)
   },
   infoMsg: (message: string) => {
-    set((state) => {
-      state.messageApi?.info(message)
-      return state
-    })
+    get().messageApi?.info(message)
   },
   loadingMsg: (message: string) => {
-    set((state) => {
-      state.messageApi?.loading(message)
-      return state
-    })
+    get().messageApi?.loading(message)
   }
 }))
