@@ -8,7 +8,7 @@ const BulkProcPage: React.FC = () => {
 
   return (
     <>
-      <Typography.Title level={3}>Bulk Uplaod Dest Files</Typography.Title>
+      <Typography.Title level={3}>Bulk Upload Dest Files</Typography.Title>
       <Typography.Paragraph>
         You can upload multiple files at once by dragging and dropping them into the area below or by clicking to select files.<br />
         {/* If you leave the page, the upload process will continue, but the list may disappear. */}
