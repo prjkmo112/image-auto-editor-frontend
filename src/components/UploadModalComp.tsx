@@ -1,9 +1,10 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Button, Form, Input, message, Modal, Select, Space, Upload, UploadFile } from "antd"
+import { Button, Form, Input, Modal, Select, Space, Upload, UploadFile } from "antd"
 import { MinusCircleOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons"
 import { useUIStore } from "@/stores/uiStore"
 import { targetImagesApi } from "@/api"
+import { useMessageStore } from "@/stores/messageStore"
 
 interface UploadModalCompProps {
   isModalOpen: boolean;
@@ -13,8 +14,8 @@ interface UploadModalCompProps {
 const UploadModalComp: React.FC<UploadModalCompProps> = (props) => {
   const navigate = useNavigate()
   const { setIsLoading } = useUIStore()
+  const { successMsg, errorMsg } = useMessageStore()
   const [ form ] = Form.useForm()
-  const [ messageApi, contextHolder ] = message.useMessage()
 
   const [ fileList, setFileList ] = useState<UploadFile[]>([])
 
@@ -35,9 +36,9 @@ const UploadModalComp: React.FC<UploadModalCompProps> = (props) => {
 
       navigate(0)
 
-      messageApi.success('Successfully uploaded image')
-    } catch (error) {
-      messageApi.error('Failed to upload image')
+      successMsg('Successfully uploaded image')
+    } catch (_) {
+      errorMsg('Failed to upload image')
     } finally {
       setIsLoading(false)
     }
@@ -45,8 +46,6 @@ const UploadModalComp: React.FC<UploadModalCompProps> = (props) => {
 
   return (
     <>
-      {contextHolder}
-
       <Modal
         title="Upload Target Image"
         open={props.isModalOpen}

@@ -102,13 +102,13 @@ export interface ProcessedImageResponse {
      * @type {number}
      * @memberof ProcessedImageResponse
      */
-    'sliced_file_size': number;
+    'sliced_file_size'?: number | null;
     /**
      * 
      * @type {string}
      * @memberof ProcessedImageResponse
      */
-    'sliced_file_mime_type': string;
+    'sliced_file_mime_type'?: string | null;
     /**
      * 
      * @type {string}

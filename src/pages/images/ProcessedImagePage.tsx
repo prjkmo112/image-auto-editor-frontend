@@ -1,39 +1,45 @@
 import { useEffect, useState } from "react"
-import { Row, Col, Card, message, Image } from "antd"
-import { ProcessedImageListResponse, procImageApi } from '../api'
+import { Row, Col, Card, Image, Pagination } from "antd"
+import { ProcessedImageListResponse, procImageApi } from '@api'
 import { useUIStore } from "@/stores/uiStore"
-import ImageDetailDrawerComp from "./ImageDetailDrawerComp"
+import ImageDetailDrawerComp from "@/components/ImageDetailDrawerComp"
+import { useMessageStore } from "@/stores/messageStore"
+
+
+const ITEMS_PER_PAGE = 8
 
 const ProcessedImagePage = () => {
   const { setIsLoading } = useUIStore()
-  const [ messageApi, contextHolder ] = message.useMessage()
+  const { successMsg, errorMsg } = useMessageStore()
 
   const [ drawerOpenedImage, setDrawerOpenedImage ] = useState<ProcessedImageListResponse['items'][number] | null>(null)
   const [ processedImages, setProcessedImages ] = useState<ProcessedImageListResponse['items']>([])
+  const [ totalCnt, setTotalCnt ] = useState(ITEMS_PER_PAGE)
+
+  const loadProcImages = async (page: number) => {
+    try {
+      setIsLoading(true)
+      const { data } = await procImageApi.getProcImageListApiProcImagesListGet(page, ITEMS_PER_PAGE)
+      setProcessedImages(data.items ?? [])
+      setTotalCnt(data.cnt ?? ITEMS_PER_PAGE)
+      successMsg('Successfully got processed images')
+    } catch (_) {
+      errorMsg('Failed to get processed images')
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
-    (async () => {
-      try {
-        setIsLoading(true)
-        const { data } = await procImageApi.getProcImageListApiProcImagesListGet()
-        setProcessedImages(data.items ?? [])
-        messageApi.success('Successfully got processed images')
-      } catch (err) {
-        messageApi.error('Failed to get processed images')
-      } finally {
-        setIsLoading(false)
-      }
-    })()
+    loadProcImages(1)
   }, [])
 
   return (
     <>
-      {contextHolder}
-
       <div style={{ marginTop: "2em" }}>
         <Row gutter={[24, 24]}>
           {processedImages.map((img) => (
-            <Col span={8}>
+            <Col span={6}>
               <Card
                 key={img.id}
                 hoverable
@@ -46,14 +52,16 @@ const ProcessedImagePage = () => {
                 }
               >
                 <div onClick={() => setDrawerOpenedImage(img)}>
-                  <Card.Meta
-                    description={img.created_at}
-                  />
+                  <Card.Meta description={img.created_at} />
                 </div>
               </Card>
             </Col>
           ))}
         </Row>
+
+        <div style={{ marginTop: "2em" }}>
+          <Pagination align="center" total={totalCnt} pageSize={ITEMS_PER_PAGE} onChange={p => loadProcImages(p)} />
+        </div>
       </div>
 
       <ImageDetailDrawerComp

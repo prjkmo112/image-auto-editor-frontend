@@ -42,7 +42,7 @@ const cacheAdapter: AxiosAdapter = async (config) => {
 
 // axios
 const axiosClient = axios.create({
-  timeout: 10 * 1000,
+  timeout: 100 * 1000,
   withCredentials: true,
   // adapter: cacheAdapter,
 })

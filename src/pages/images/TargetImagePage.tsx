@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
-import { useUIStore } from "../stores/uiStore"
-import { TargetImageListResponse, targetImagesApi } from "../api"
-import { Button, Card, Col, Image, message, Row, Tag } from "antd"
+import { useUIStore } from "../../stores/uiStore"
+import { TargetImageListResponse, targetImagesApi } from "../../api"
+import { Button, Card, Col, Image, Row, Tag } from "antd"
 import { PlusOutlined } from "@ant-design/icons"
-import UploadModalComp from "./UploadModalComp"
-import ImageDetailDrawerComp from "./ImageDetailDrawerComp"
+import UploadModalComp from "@/components/UploadModalComp"
+import ImageDetailDrawerComp from "@/components/ImageDetailDrawerComp"
+import { useMessageStore } from "@/stores/messageStore"
 
 const TargetImagePage = () => {
   const { setIsLoading } = useUIStore()
-  const [ messageApi, contextHolder ] = message.useMessage()
+  const { successMsg, errorMsg } = useMessageStore()
 
   const [ isModalOpen, setIsModalOpen ] = useState(false)
   const [ drawerOpenedImage, setDrawerOpenedImage ] = useState<TargetImageListResponse['items'][number] | null>(null)
@@ -20,9 +21,9 @@ const TargetImagePage = () => {
         setIsLoading(true)
         const { data } = await targetImagesApi.getTargetImagesListApiTargetImagesListGet()
         setTargetImages(data.items ?? [])
-        messageApi.success('Successfully got target images')
+        successMsg('Successfully got target images')
       } catch (_) {
-        messageApi.error('Failed to get target images')
+        errorMsg('Failed to get target images')
       } finally {
         setIsLoading(false)
       }
@@ -31,8 +32,6 @@ const TargetImagePage = () => {
 
   return (
     <>
-      {contextHolder}
-
       <Row>
         <Col span={12}>
           <Tag color="red">Inactive: Red border</Tag>
