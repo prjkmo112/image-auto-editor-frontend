@@ -39,9 +39,8 @@ const ProcessedImagePage = () => {
       <div style={{ marginTop: "2em" }}>
         <Row gutter={[24, 24]}>
           {processedImages.map((img) => (
-            <Col span={6}>
+            <Col key={img.id} span={6}>
               <Card
-                key={img.id}
                 hoverable
                 style={{ padding: ".2rem", borderWidth: '2px' }}
                 cover={
