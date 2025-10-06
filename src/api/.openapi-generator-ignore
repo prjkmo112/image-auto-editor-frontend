@@ -24,3 +24,5 @@
 
 index.ts
 customAxios.ts
+
+.gitignore

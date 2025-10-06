@@ -1,4 +1,3 @@
-.gitignore
 .npmignore
 README.md
 api.ts
@@ -9,6 +8,8 @@ docs/DefaultApi.md
 docs/HTTPValidationError.md
 docs/ImageApi.md
 docs/ProcImageApi.md
+docs/ProcessedImageListResponse.md
+docs/ProcessedImageResponse.md
 docs/TargetImageListResponse.md
 docs/TargetImageResponse.md
 docs/TargetImagesApi.md

@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react"
-import { useUIStore } from "../stores/uiStore"
-import { TargetImageListResponse, TargetImageResponse, targetImagesApi } from "../api"
-import { Button, Card, Col, Image, message, Row, Tag } from "antd"
+import { useUIStore } from "../../stores/uiStore"
+import { TargetImageListResponse, targetImagesApi } from "../../api"
+import { Button, Card, Col, Image, Row, Tag } from "antd"
 import { PlusOutlined } from "@ant-design/icons"
-import UploadModalComp from "./taget-image-page/UploadModalComp"
-import ImageDetailDrawerComp from "./taget-image-page/ImageDetailDrawerComp"
+import UploadModalComp from "@/components/UploadModalComp"
+import ImageDetailDrawerComp from "@/components/ImageDetailDrawerComp"
+import { useMessageStore } from "@/stores/messageStore"
 
 const TargetImagePage = () => {
   const { setIsLoading } = useUIStore()
-  const [ messageApi, contextHolder ] = message.useMessage()
+  const { successMsg, errorMsg } = useMessageStore()
 
   const [ isModalOpen, setIsModalOpen ] = useState(false)
-  const [ drawerOpenedImg, setDrawerOpenedImg ] = useState<TargetImageResponse | null>(null)
+  const [ drawerOpenedImage, setDrawerOpenedImage ] = useState<TargetImageListResponse['items'][number] | null>(null)
   const [ targetImages, setTargetImages ] = useState<TargetImageListResponse['items']>([])
 
   useEffect(() => {
@@ -20,9 +21,9 @@ const TargetImagePage = () => {
         setIsLoading(true)
         const { data } = await targetImagesApi.getTargetImagesListApiTargetImagesListGet()
         setTargetImages(data.items ?? [])
-        messageApi.success('Successfully got target images')
-      } catch (err) {
-        messageApi.error('Failed to get target images')
+        successMsg('Successfully got target images')
+      } catch (_) {
+        errorMsg('Failed to get target images')
       } finally {
         setIsLoading(false)
       }
@@ -31,8 +32,6 @@ const TargetImagePage = () => {
 
   return (
     <>
-      {contextHolder}
-
       <Row>
         <Col span={12}>
           <Tag color="red">Inactive: Red border</Tag>
@@ -56,13 +55,12 @@ const TargetImagePage = () => {
                 }}
                 cover={
                   <Image
-                    src={`${window.APP_CONFIG.IMG_SERVER_URL}/${img.url_id}`}
-                    preview
-                    style={{ height: "20em", objectFit: "cover" }}
+                    src={`${window.APP_CONFIG.IMG_SERVER_URL}/target/${img.url_id}`}
+                    style={{ height: "20em", objectFit: "contain" }}
                   />
                 }
               >
-                <div onClick={() => setDrawerOpenedImg(img)} style={{ cursor: 'pointer' }}>
+                <div onClick={() => setDrawerOpenedImage(img)}>
                   <Card.Meta
                     title={img.name}
                     description={(
@@ -81,9 +79,12 @@ const TargetImagePage = () => {
 
       <UploadModalComp isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       <ImageDetailDrawerComp
-        isOpen={drawerOpenedImg !== null}
-        closeDrawer={() => setDrawerOpenedImg(null)}
-        img={drawerOpenedImg}
+        open={drawerOpenedImage !== null}
+        drawerCloseFn={() => setDrawerOpenedImage(null)}
+        imgViewInfo={{
+          type: "single",
+          url: `${window.APP_CONFIG.IMG_SERVER_URL}/target/${drawerOpenedImage?.url_id}`,
+        }}
       />
     </>
   )
